@@ -21,9 +21,25 @@ class _TodoAppState extends State<TodoApp> {
         centerTitle: true,
         title: Text("Todo App"),
       ),
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
       body: ListView(
         children: [
           TextFormField(),
+          ListTile(
+            title: Text("Get up"),
+            leading: Icon(Icons.info),
+          ),
+          ListTile(
+            title: Text("code"),
+            leading: Icon(Icons.info),
+          ),
+          ListTile(
+            title: Text("sleep"),
+            leading: Icon(Icons.info),
+          ),
         ],
       ),
     );
