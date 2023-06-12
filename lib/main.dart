@@ -14,6 +14,14 @@ class TodoApp extends StatefulWidget {
 }
 
 class _TodoAppState extends State<TodoApp> {
+  String value = "";
+  List listTodo = [''];
+  addTodo(String item) {
+    setState(() {
+      listTodo.add(item);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,26 +30,32 @@ class _TodoAppState extends State<TodoApp> {
         title: Text("Todo App"),
       ),
       floatingActionButton: FloatingActionButton.small(
-        onPressed: () {},
+        onPressed: () {
+          addTodo(value);
+        },
         child: Icon(Icons.add),
       ),
-      body: ListView(
-        children: [
-          TextFormField(),
-          ListTile(
-            title: Text("Get up"),
-            leading: Icon(Icons.info),
-          ),
-          ListTile(
-            title: Text("code"),
-            leading: Icon(Icons.info),
-          ),
-          ListTile(
-            title: Text("sleep"),
-            leading: Icon(Icons.info),
-          ),
-        ],
-      ),
+      body: ListView.builder(
+          itemCount: listTodo.length,
+          itemBuilder: (context, index) {
+            return index == 0
+                ? Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(hintText: "Add Item"),
+                      onChanged: (val) {
+                        value = val;
+                      },
+                    ),
+                  )
+                : ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text(
+                      '${listTodo[index]}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  );
+          }),
     );
   }
 }
